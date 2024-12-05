@@ -1,7 +1,7 @@
 # Variables
 DOCKER = docker
 DOCKER_COMPOSE = docker compose
-EXEC = $(DOCKER) exec -it php-fpm
+EXEC = $(DOCKER) exec -it awdes-php-fpm
 PHP = $(EXEC) php
 COMPOSER = $(EXEC) composer
 
@@ -12,11 +12,11 @@ RED = /bin/echo -e "\x1b[31m\#\# $1\x1b[0m"
 ## —— 🔥 App ——————————————————————————————————————————————————————————————————
 .PHONY: init
 init: ## Init the project
-	$(MAKE) create-folders
 	$(MAKE) build
 	$(MAKE) start
 	$(COMPOSER) install --prefer-dist
-	@$(call GREEN,"The application is available at: $(HOST).")
+	$(COMPOSER) dev-tools-setup
+	@$(call GREEN,"The application installed successfully.")
 
 .PHONY: cache-clear
 cache-clear: ## Clear cache
@@ -24,12 +24,12 @@ cache-clear: ## Clear cache
 
 .PHONY: php
 php: ## Returns a bash of the PHP container
-	$(DOCKER_COMPOSE) up -d php-fpm
+	$(DOCKER_COMPOSE) up -d awdes-php-fpm
 	$(MAKE) php-bash
 
 .PHONY: php-bash
 php-bash:
-	$(DOCKER_COMPOSE) exec php-fpm bash -l
+	$(DOCKER_COMPOSE) exec awdes-php-fpm bash -l
 
 ## —— ✅ Test ——————————————————————————————————————————————————————————————————
 .PHONY: tests
@@ -81,11 +81,6 @@ composer-update: ## Update dependencies
 .PHONY: composer-clear-cache
 composer-clear-cache: ## clear-cache dependencies
 	$(COMPOSER) clear-cache
-
-.PHONY: create-folders
-create-folders: ## Create data folders
-	mkdir -p ./databases/mysql ./logs/nginx
-	#touch ./logs/nginx/error.log
 
 ## —— 🛠️ Others ——————————————————————————————————————————————————————————————
 .PHONY: help

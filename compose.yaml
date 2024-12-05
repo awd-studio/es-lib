@@ -1,7 +1,7 @@
 services:
 
-    php-fpm:
-        container_name: "php-fpm"
+    awdes-php-fpm:
+        container_name: "awdes-php-fpm"
         build:
             context: ./docker/php-fpm
             args:
