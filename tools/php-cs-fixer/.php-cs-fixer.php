@@ -12,8 +12,9 @@ $finder = new PhpCsFixer\Finder();
 $finder
     ->in(__DIR__ . '/../../src')
     ->append([
-        __DIR__ . '/../../tests',
-        __DIR__ . '/.php-cs-fixer.php',
+        __DIR__ . '/../../example',
+        __DIR__ . '/*.php',
+        __DIR__ . '../rector/*.php',
     ])
 ;
 
@@ -24,7 +25,6 @@ $config
     ->setRules([
         '@PER-CS2.0' => true,
         '@PHP83Migration' => true,
-        '@PHPUnit75Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'protected_to_private' => false,

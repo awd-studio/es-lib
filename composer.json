@@ -11,14 +11,18 @@
     }
   ],
   "require": {
-    "php": ">=8.4",
-    "symfony/uid": "^7.1"
+    "php": ">=8.3",
+    "symfony/uid": "^7.1",
+    "psr/container": "^2.0",
+    "awd-studio/vo-date-time": "^1.0"
   },
   "require-dev": {
     "dg/bypass-finals": "^1.4",
     "ergebnis/composer-normalize": "^2.45",
     "phpunit/phpunit": "^11.0",
-    "roave/security-advisories": "dev-latest"
+    "roave/security-advisories": "dev-latest",
+    "phpspec/prophecy": "^1.20",
+    "phpspec/prophecy-phpunit": "^2.3"
   },
   "autoload": {
     "psr-4": {
@@ -28,8 +32,9 @@
   "autoload-dev": {
     "psr-4": {
       "AwdEs\\Tests\\": "tests/",
-      "AwdEs\\Tests\\Shared\\": "tests/shared/",
-      "AwdEs\\Tests\\Unit\\": "tests/unit/"
+      "AwdEs\\Tests\\Integration\\": "tests/Integration/",
+      "AwdEs\\Tests\\Shared\\": "tests/Shared/",
+      "AwdEs\\Tests\\Unit\\": "tests/Unit/"
     }
   },
   "config": {
@@ -40,13 +45,14 @@
   "scripts": {
     "ca": [
       "@phpstan-analyse",
-      "@psalm-analyse",
       "@php-cs-fixer-dry",
+      "@php-cs-fixer-tests-dry",
       "@rector-dry-run",
       "@rector-tests-dry-run"
     ],
     "code-fix": [
       "@php-cs-fixer-fix",
+      "@php-cs-fixer-tests-fix",
       "@rector",
       "@rector-tests"
     ],
@@ -78,21 +84,25 @@
       "@dev-update-rector"
     ],
     "dev-update-php-cs-fixer": [
-      "composer update -W --working-dir=tools/php-cs-fixer --prefer-dist --no-progress --no-interaction"
+      "composer update --with-all-dependencies --working-dir=tools/php-cs-fixer --prefer-dist --no-progress --no-interaction"
     ],
     "dev-update-phpstan": [
-      "composer update -W --working-dir=tools/phpstan --prefer-dist --no-progress --no-interaction"
+      "composer update --with-all-dependencies --working-dir=tools/phpstan --prefer-dist --no-progress --no-interaction"
     ],
     "dev-update-rector": [
-      "composer update -W --working-dir=tools/rector --prefer-dist --no-progress --no-interaction"
+      "composer update --with-all-dependencies --working-dir=tools/rector --prefer-dist --no-progress --no-interaction"
     ],
     "php-cs-fixer-clear-cache": "rm -rf tools/cache/php-cs-fixer",
-    "php-cs-fixer-dry": "@php-cs-fixer-run fix --dry-run --diff --stop-on-violation",
-    "php-cs-fixer-fix": "@php-cs-fixer-run fix --diff --stop-on-violation",
+    "php-cs-fixer-dry": "@php-cs-fixer-run fix --dry-run --diff",
+    "php-cs-fixer-fix": "@php-cs-fixer-run fix --diff",
+    "php-cs-fixer-tests-dry": "@php-cs-fixer-tests-run fix --dry-run --diff",
+    "php-cs-fixer-tests-fix": "@php-cs-fixer-tests-run fix --diff",
     "php-cs-fixer-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.php",
+    "php-cs-fixer-tests-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer-tests.php",
     "phpstan-analyse": "@phpstan-run analyse -v",
     "phpstan-clear-cache": "rm -rf tools/cache/phpstan",
     "phpstan-run": "tools/phpstan/vendor/bin/phpstan --configuration=tools/phpstan/phpstan.neon",
+    "phpunit": "vendor/bin/phpunit tests",
     "rector": "@rector-process --config=tools/rector/rector.php",
     "rector-dry-run": "@rector --dry-run",
     "rector-process": "tools/rector/vendor/bin/rector process",
@@ -100,7 +110,7 @@
     "rector-tests-dry-run": "@rector-tests --dry-run",
     "test": [
       "@ca",
-      "phpunit"
+      "@phpunit"
     ]
   },
   "scripts-aliases": {

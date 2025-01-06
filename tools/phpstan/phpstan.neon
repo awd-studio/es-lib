@@ -2,10 +2,11 @@ parameters:
 	level: max
 	paths:
 		- ../../src
-		- ../../tests
+		- ../../example
+#		- ../../tests
 
-	ignoreErrors:
-		-
-		    identifier: missingType.generics
+#	ignoreErrors:
+#		-
+#		    identifier: missingType.generics
 
 	tmpDir: ../cache/phpstan
