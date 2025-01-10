@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AwdEs\Tests\Unit\Attribute\Reflection\EventHandler;
 
 use AwdEs\Attribute\EventHandler;
-use AwdEs\Attribute\Reflection\EventHandler\AttributeEventHandlerMethodResolver;
-use AwdEs\Attribute\Reflection\EventHandler\Exception\WrongEventHandlerDeclaration;
+use AwdEs\Attribute\Reflection\Event\Handling\AttributeEventHandlerMethodResolver;
+use AwdEs\Event\Handling\Exception\WrongEventHandlerDeclaration;
 use AwdEs\Tests\Shared\AppTestCase;
 use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\BaseEventStub;
 use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\EventStub;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Attribute;
+namespace AwdEs\Attribute\Finder;
 
 interface MethodsAttributeFinder
 {
@@ -13,8 +13,6 @@ interface MethodsAttributeFinder
      * @param class-string<TAttribute> $attribute
      *
      * @return \Generator<string, TAttribute>
-     *
-     * @throws MethodsAttributeFinderError
      */
     public function find(string $class, string $attribute): \Generator;
 }

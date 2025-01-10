@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AwdEs\Attribute\Reflection\Event\Applying;
 
 use AwdEs\Attribute\EventHandler;
-use AwdEs\Attribute\MethodsAttributeFinder;
+use AwdEs\Attribute\Finder\MethodsAttributeFinder;
 use AwdEs\Event\Applying\EventApplier;
 use AwdEs\Event\Applying\Exception\EventApplyingError;
 use AwdEs\Event\EntityEvent;

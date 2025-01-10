@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Attribute\Reflection\EventHandler;
+namespace AwdEs\Attribute\Reflection\Event\Handling;
 
 use AwdEs\Attribute\EventHandler;
-use AwdEs\Attribute\Reflection\EventHandler\Exception\WrongEventHandlerDeclaration;
 use AwdEs\Event\Handling\EventHandlerMethodResolver;
+use AwdEs\Event\Handling\Exception\WrongEventHandlerDeclaration;
 
 final readonly class AttributeEventHandlerMethodResolver implements EventHandlerMethodResolver
 {

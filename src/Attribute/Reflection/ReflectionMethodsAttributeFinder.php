@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AwdEs\Attribute\Reflection;
 
-use AwdEs\Attribute\MethodsAttributeFinder;
+use AwdEs\Attribute\Finder\MethodsAttributeFinder;
 
 final readonly class ReflectionMethodsAttributeFinder implements MethodsAttributeFinder
 {
