@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Tests\Unit\Reflection\EventHandler;
+namespace AwdEs\Tests\Unit\Attribute\Reflection\EventHandler;
 
 use AwdEs\Attribute\EventHandler;
 use AwdEs\Attribute\Reflection\EventHandler\AttributeEventHandlerMethodResolver;
-use AwdEs\Reflection\EventHandler\WrongEventHandlerDeclaration;
+use AwdEs\Attribute\Reflection\EventHandler\Exception\WrongEventHandlerDeclaration;
 use AwdEs\Tests\Shared\AppTestCase;
-use AwdEs\Tests\Unit\Reflection\EventHandler\Mocking\BaseEventStub;
-use AwdEs\Tests\Unit\Reflection\EventHandler\Mocking\EventStub;
-use AwdEs\Tests\Unit\Reflection\EventHandler\Mocking\EventStub2;
-use AwdEs\Tests\Unit\Reflection\EventHandler\Mocking\EventStubHandler;
+use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\BaseEventStub;
+use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\EventStub;
+use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\EventStub2;
+use AwdEs\Tests\Unit\Attribute\Reflection\EventHandler\Mocking\EventStubHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 use function PHPUnit\Framework\assertArrayHasKey;
@@ -20,7 +20,7 @@ use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertSame;
 
 #[CoversClass(AttributeEventHandlerMethodResolver::class)]
-final class EsEventHandlerMethodFinderTest extends AppTestCase
+final class AttributeEventHandlerMethodResolverTest extends AppTestCase
 {
     private AttributeEventHandlerMethodResolver $instance;
 

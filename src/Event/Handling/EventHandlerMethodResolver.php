@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AwdEs\Event\Handling;
 
-use AwdEs\Reflection\EventHandler\WrongEventHandlerDeclaration;
+use AwdEs\Attribute\Reflection\EventHandler\Exception\WrongEventHandlerDeclaration;
 
 interface EventHandlerMethodResolver
 {

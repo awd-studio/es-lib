@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Implementation\Event\Applying;
+namespace AwdEs\Attribute\Reflection\Event\Applying;
 
 use AwdEs\Attribute\EventHandler;
 use AwdEs\Attribute\MethodsAttributeFinder;

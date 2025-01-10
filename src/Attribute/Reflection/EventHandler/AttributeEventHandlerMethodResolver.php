@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace AwdEs\Attribute\Reflection\EventHandler;
 
 use AwdEs\Attribute\EventHandler;
+use AwdEs\Attribute\Reflection\EventHandler\Exception\WrongEventHandlerDeclaration;
 use AwdEs\Event\Handling\EventHandlerMethodResolver;
-use AwdEs\Reflection\EventHandler\WrongEventHandlerDeclaration;
 
 final readonly class AttributeEventHandlerMethodResolver implements EventHandlerMethodResolver
 {

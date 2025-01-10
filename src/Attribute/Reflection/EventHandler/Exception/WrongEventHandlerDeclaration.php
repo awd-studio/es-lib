@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Reflection\EventHandler;
+namespace AwdEs\Attribute\Reflection\EventHandler\Exception;
 
 use AwdEs\Exception\LogicException;
 

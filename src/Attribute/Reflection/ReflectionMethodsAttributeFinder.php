@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Reflection\Attribute;
+namespace AwdEs\Attribute\Reflection;
 
 use AwdEs\Attribute\MethodsAttributeFinder;
 
