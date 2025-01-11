@@ -7,9 +7,7 @@ namespace AwdEs\Event\Entity\Assembling;
 use AwdEs\Entity\AggregateEntity;
 use AwdEs\Entity\Composing\EntityComposer;
 use AwdEs\Event\Applying\EventApplier;
-use AwdEs\Event\Storage\Fetcher\Criteria\AndCriterion;
-use AwdEs\Event\Storage\Fetcher\Criteria\ByEntityTypeCriterion;
-use AwdEs\Event\Storage\Fetcher\Criteria\ByIdCriterion;
+use AwdEs\Event\Storage\Fetcher\Criteria\ByTypeAndIdCriteria;
 use AwdEs\Event\Storage\Fetcher\EventFetcher;
 use AwdEs\ValueObject\Id;
 
@@ -23,7 +21,7 @@ final readonly class EventsEntityComposer implements EntityComposer
     #[\Override]
     public function compose(string $entityType, Id $entityId): AggregateEntity
     {
-        $criteria = new AndCriterion(new ByIdCriterion($entityId), new ByEntityTypeCriterion($entityType));
+        $criteria = new ByTypeAndIdCriteria($entityType, $entityId);
         $eventStream = $this->eventFetcher->fetch($criteria);
         $entity = new $entityType();
 

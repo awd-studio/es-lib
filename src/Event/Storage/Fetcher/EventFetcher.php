@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace AwdEs\Event\Storage\Fetcher;
 
 use AwdEs\Event\EventStream;
-use AwdEs\Event\Storage\Fetcher\Criteria\Criterion;
+use AwdEs\Event\Storage\Fetcher\Criteria\Criteria;
 
 interface EventFetcher
 {
-    public function fetch(Criterion $criteria): EventStream;
+    /**
+     * @throws Exception\EventFetchingError
+     */
+    public function fetch(Criteria $criteria): EventStream;
 }

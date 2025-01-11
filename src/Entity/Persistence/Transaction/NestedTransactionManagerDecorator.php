@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AwdEs\Entity\Persistence\Transaction;
 
-final class NestedTransactionManager implements TransactionManager
+final class NestedTransactionManagerDecorator implements TransactionManager
 {
     private int $level = 0;
 

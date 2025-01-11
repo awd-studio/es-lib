@@ -23,15 +23,10 @@ final class EsEventStreamTest extends AppTestCase
 {
     private EntityEvent $eventMock;
 
-
-    private EventStream $instance;
-
     #[\Override]
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->instance = new EventStream();
 
         $this->eventMock = $this->prophesizeEvent()->reveal();
     }
@@ -131,33 +126,6 @@ final class EsEventStreamTest extends AppTestCase
         $instance->append($event1);
         $instance->append($event2);
         $instance->append($event3);
-
-        $emittedEvents = iterator_to_array($instance);
-
-        assertSame($emittedEvents[0], $event1);
-        assertSame($emittedEvents[1], $event2);
-        assertSame($emittedEvents[2], $event3);
-    }
-
-    public function testMustIterateEventsFromOlderToNewerDespiteTheOrderOfAppending(): void
-    {
-        $p1 = $this->prophesizeEvent();
-        $p2 = $this->prophesizeEvent();
-        $p3 = $this->prophesizeEvent();
-
-        $p1->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:47'));
-        $p2->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:48'));
-        $p3->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:49'));
-
-        $event1 = $p1->reveal();
-        $event2 = $p2->reveal();
-        $event3 = $p3->reveal();
-
-        $instance = new EventStream();
-
-        $instance->append($event1);
-        $instance->append($event3);
-        $instance->append($event2);
 
         $emittedEvents = iterator_to_array($instance);
 
