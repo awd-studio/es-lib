@@ -82,6 +82,10 @@ composer-update: ## Update dependencies
 composer-clear-cache: ## clear-cache dependencies
 	$(COMPOSER) clear-cache
 
+.PHONY: composer-normalize
+composer-normalize: ## clear-cache dependencies
+	$(COMPOSER) normalize
+
 ## —— 🛠️ Others ——————————————————————————————————————————————————————————————
 .PHONY: help
 help: ## List of commands

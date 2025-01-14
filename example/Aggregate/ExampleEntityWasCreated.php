@@ -6,5 +6,5 @@ namespace Example\Aggregate;
 
 use AwdEs\Attribute\AsEntityEvent;
 
-#[AsEntityEvent(eventId: 'EXAMPLE_ENTITY_WAS_CREATED', aggregateRoot: ExampleAggregate::class)]
+#[AsEntityEvent(eventId: 'EXAMPLE_ENTITY_WAS_CREATED', entityType: ExampleEntity::class)]
 final readonly class ExampleEntityWasCreated extends ExampleEvent {}

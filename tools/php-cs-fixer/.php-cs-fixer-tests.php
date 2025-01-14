@@ -46,7 +46,7 @@ $config
         'php_unit_expectation' => true,
         'php_unit_set_up_tear_down_visibility' => true,
     ])
-    ->setCacheFile(__DIR__ . '/../cache/php-cs-fixer/.php-cs-fixer.cache')
+    ->setCacheFile(__DIR__ . '/../cache/php-cs-fixer/.php-cs-fixer-tests.cache')
 ;
 
 return $config;

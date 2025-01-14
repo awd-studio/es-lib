@@ -93,18 +93,19 @@ final class EsEventStreamTest extends AppTestCase
         assertFalse($instance->isEmpty());
     }
 
-    public function testMustNotClearMessagesAfterLooping(): void
+    public function testMustClearMessagesAfterLooping(): void
     {
         $instance = new EventStream();
 
         $instance->append($this->eventMock);
 
+        assertCount(1, $instance);
+
         foreach ($instance as $event) {
             // do nothing
         }
 
-        assertCount(1, $instance);
-        assertContains($this->eventMock, $instance);
+        assertCount(0, $instance);
     }
 
     public function testMustIterateEventsFromOlderToNewer(): void
@@ -154,7 +155,7 @@ final class EsEventStreamTest extends AppTestCase
         $instance->append($event3);
         $instance->append($event2);
 
-        $emittedEvents = iterator_to_array($instance->emit());
+        $emittedEvents = iterator_to_array($instance);
 
         assertCount(3, $emittedEvents);
         assertContains($event1, $emittedEvents);
@@ -182,7 +183,7 @@ final class EsEventStreamTest extends AppTestCase
         $instance->append($event3);
         $instance->append($event2);
 
-        iterator_to_array($instance->emit());
+        iterator_to_array($instance);
 
         assertCount(0, $instance);
         assertTrue($instance->isEmpty());

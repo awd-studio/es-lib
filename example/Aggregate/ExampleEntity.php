@@ -28,7 +28,22 @@ final class ExampleEntity extends AggregateEntity
     #[EventHandler(ExampleEntityWasCreated::class)]
     public function onExampleEntityWasCreated(ExampleEntityWasCreated $event): void
     {
+        if (false === isset($this->id)) {
+            throw new ExampleEntityInitViolation(sprintf('The entity "%s:%s" has already been created.', self::class, $this->id));
+        }
+
         $this->id = $event->entityId();
+        $this->modifiedAt = $event->occurredAt();
+    }
+
+    public function change(IDateTime $modifiedAt): void
+    {
+        $this->recordThat(new ExampleEntityWasChanged($this->id, $modifiedAt));
+    }
+
+    #[EventHandler(ExampleEntityWasChanged::class)]
+    public function onExampleEntityWasChanged(ExampleEntityWasChanged $event): void
+    {
         $this->modifiedAt = $event->occurredAt();
     }
 

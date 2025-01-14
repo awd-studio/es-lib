@@ -8,11 +8,11 @@ namespace AwdEs\Attribute;
 final readonly class AsEntityEvent
 {
     /**
-     * @param string                                       $eventId       a unique ID of an entity in the system
-     * @param class-string<\AwdEs\Aggregate\AggregateRoot> $aggregateRoot the aggregate class' fqcn
+     * @param string                                      $eventId    a unique ID of an event in the system
+     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityType the entity class' fqcn
      */
     public function __construct(
         public string $eventId,
-        public string $aggregateRoot,
+        public string $entityType,
     ) {}
 }

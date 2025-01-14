@@ -23,18 +23,13 @@ final readonly class EventStream implements \IteratorAggregate, \Countable
         return 0 === $this->eventCollection->count();
     }
 
-    public function emit(): \Generator
-    {
-        foreach ($this as $event) {
-            yield $event;
-            $this->eventCollection->detach($event);
-        }
-    }
-
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->eventCollection->sorted();
+        foreach ($this->eventCollection->sorted() as $event) {
+            yield $event;
+            $this->eventCollection->detach($event);
+        }
     }
 
     #[\Override]

@@ -3,7 +3,6 @@
   "description": "An event-sourcing library",
   "license": "MIT",
   "type": "library",
-  "version": "0.0.1",
   "authors": [
     {
       "name": "Anton Karpov",
@@ -12,17 +11,17 @@
   ],
   "require": {
     "php": ">=8.3",
-    "symfony/uid": "^7.1",
+    "awd-studio/vo-date-time": "^1.0",
     "psr/container": "^2.0",
-    "awd-studio/vo-date-time": "^1.0"
+    "symfony/uid": "^7.1"
   },
   "require-dev": {
     "dg/bypass-finals": "^1.4",
     "ergebnis/composer-normalize": "^2.45",
-    "phpunit/phpunit": "^11.0",
-    "roave/security-advisories": "dev-latest",
     "phpspec/prophecy": "^1.20",
-    "phpspec/prophecy-phpunit": "^2.3"
+    "phpspec/prophecy-phpunit": "^2.3",
+    "phpunit/phpunit": "^11.0",
+    "roave/security-advisories": "dev-latest"
   },
   "autoload": {
     "psr-4": {
@@ -43,7 +42,7 @@
     }
   },
   "scripts": {
-    "ca": [
+    "code-analyze": [
       "@phpstan-analyse",
       "@php-cs-fixer-dry",
       "@php-cs-fixer-tests-dry",
@@ -55,6 +54,11 @@
       "@php-cs-fixer-tests-fix",
       "@rector",
       "@rector-tests"
+    ],
+    "dev-clear-cache": [
+      "@php-cs-fixer-clear-cache-all",
+      "@phpstan-clear-cache",
+      "@rector-clear-cache-all"
     ],
     "dev-install-php-cs-fixer": [
       "mkdir -p tools/cache/php-cs-fixer",
@@ -93,29 +97,46 @@
       "composer update --with-all-dependencies --working-dir=tools/rector --prefer-dist --no-progress --no-interaction"
     ],
     "php-cs-fixer-clear-cache": "rm -rf tools/cache/php-cs-fixer",
+    "php-cs-fixer-clear-cache-all": [
+      "@php-cs-fixer-clear-cache",
+      "@php-cs-fixer-tests-clear-cache"
+    ],
     "php-cs-fixer-dry": "@php-cs-fixer-run fix --dry-run --diff",
     "php-cs-fixer-fix": "@php-cs-fixer-run fix --diff",
+    "php-cs-fixer-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.php",
+    "php-cs-fixer-tests-clear-cache": "rm -rf tools/cache/php-cs-fixer-tests",
     "php-cs-fixer-tests-dry": "@php-cs-fixer-tests-run fix --dry-run --diff",
     "php-cs-fixer-tests-fix": "@php-cs-fixer-tests-run fix --diff",
-    "php-cs-fixer-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer.php",
     "php-cs-fixer-tests-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer-tests.php",
     "phpstan-analyse": "@phpstan-run analyse -v",
     "phpstan-clear-cache": "rm -rf tools/cache/phpstan",
     "phpstan-run": "tools/phpstan/vendor/bin/phpstan --configuration=tools/phpstan/phpstan.neon",
     "phpunit": "vendor/bin/phpunit tests",
     "rector": "@rector-process --config=tools/rector/rector.php",
+    "rector-clear-cache": "tools/rector/vendor/bin/rector process --config=tools/rector/rector-tests.php --clear-cache --dry-run",
+    "rector-clear-cache-all": [
+      "@rector-clear-cache",
+      "@rector-tests-clear-cache"
+    ],
     "rector-dry-run": "@rector --dry-run",
     "rector-process": "tools/rector/vendor/bin/rector process",
     "rector-tests": "@rector-process --config=tools/rector/rector-tests.php",
+    "rector-tests-clear-cache": "tools/rector/vendor/bin/rector process --config=tools/rector/rector.php --clear-cache --dry-run",
     "rector-tests-dry-run": "@rector-tests --dry-run",
     "test": [
-      "@ca",
+      "@code-analyze",
       "@phpunit"
     ]
   },
   "scripts-aliases": {
+    "code-analyze": [
+      "ca"
+    ],
     "code-fix": [
       "cf"
+    ],
+    "dev-clear-cache": [
+      "dev-cc"
     ],
     "dev-tools-setup": [
       "dev-setup",
@@ -142,6 +163,15 @@
     ],
     "phpstan-clear-cache": [
       "phpstan-cc"
+    ],
+    "rector-clear-cache": [
+      "rector-cc"
+    ],
+    "rector-clear-cache-all": [
+      "rector-cca"
+    ],
+    "rector-tests-clear-cache": [
+      "rector-tcc"
     ]
   }
 }

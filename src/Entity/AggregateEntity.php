@@ -11,7 +11,7 @@ use AwdEs\ValueObject\Id;
 
 abstract class AggregateEntity implements EventEmitter
 {
-    private readonly EventStream $_newEvents;
+    private EventStream $_newEvents;
 
     final public function __construct()
     {
@@ -29,7 +29,10 @@ abstract class AggregateEntity implements EventEmitter
     #[\Override]
     final public function emitEvents(): EventStream
     {
-        return $this->_newEvents;
+        $newEvents = $this->_newEvents;
+        $this->_newEvents = new EventStream();
+
+        return $newEvents;
     }
 
     abstract public function aggregateId(): Id;

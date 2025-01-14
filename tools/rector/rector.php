@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\StmtsAwareInterface\DeclareStrictTypesRector;
 use Rector\Php84\Rector\Param\ExplicitNullableParamTypeRector;
 
 return RectorConfig::configure()
-    ->withCache(cacheDirectory: __DIR__ . '/../cache/rector')
+    ->withCache(
+        cacheClass: FileCacheStorage::class,
+        cacheDirectory: __DIR__ . '/../cache/rector'
+    )
     ->withPaths([
         __DIR__ . '/../../src',
         __DIR__ . '/../../example',
