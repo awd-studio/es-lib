@@ -1,7 +1,11 @@
+#!make
+include .env
+export
+
 # Variables
 DOCKER = docker
 DOCKER_COMPOSE = docker compose
-EXEC = $(DOCKER) exec -it awdes-php-fpm
+EXEC = $(DOCKER) exec -it $(DOCKER_SERVICE_NAME_PHP)
 PHP = $(EXEC) php
 COMPOSER = $(EXEC) composer
 
@@ -24,22 +28,17 @@ cache-clear: ## Clear cache
 
 .PHONY: php
 php: ## Returns a bash of the PHP container
-	$(DOCKER_COMPOSE) up -d awdes-php-fpm
+	$(DOCKER_COMPOSE) up -d php-fpm
 	$(MAKE) php-bash
 
 .PHONY: php-bash
 php-bash:
-	$(DOCKER_COMPOSE) exec awdes-php-fpm bash -l
+	$(DOCKER_COMPOSE) exec php-fpm bash -l
 
 ## —— ✅ Test ——————————————————————————————————————————————————————————————————
 .PHONY: tests
 tests: ## Run all tests
-	$(MAKE) database-init-test
-	$(PHP) bin/phpunit --testdox tests/unit/
-
-.PHONY: unit-test
-unit-test: ## Run unit tests
-	$(PHP) bin/phpunit --testdox tests/unit/
+	$(COMPOSER) test
 
 ## —— 🐳 Docker ———————————————————————————————————————————————————————————————
 .PHONY: build
@@ -48,11 +47,6 @@ build: ## Build app with fresh images
 
 .PHONY: start
 start: ## Start the app
-	$(MAKE) docker-start
-	@$(call GREEN,"The application is available at: $(HOST).")
-
-.PHONY: docker-start
-docker-start:
 	$(DOCKER_COMPOSE) up -d
 
 .PHONY: rebuild
@@ -63,6 +57,11 @@ rebuild: ## Rebuilds all docker containers
 .PHONY: stop
 stop: ## Stop app
 	$(MAKE) docker-stop
+
+.PHONY: down
+down:
+	$(DOCKER_COMPOSE) down
+	@$(call GREEN,"The containers are down.")
 
 .PHONY: docker-stop
 docker-stop:
