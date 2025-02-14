@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace AwdEs\Attribute;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final readonly class AsEntityEvent
+final readonly class AsEntityEvent implements AwdEsAttribute
 {
     /**
-     * @param string                                      $eventId    a unique ID of an event in the system
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityType the entity class' fqcn
+     * @param string                                      $name      a unique ID of an event in the system
+     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityFqn the entity class' fqcn
      */
     public function __construct(
-        public string $eventId,
-        public string $entityType,
+        public string $name,
+        public string $entityFqn,
     ) {}
 }

@@ -9,7 +9,7 @@ use AwdEs\Attribute\AsAggregateRoot;
 use AwdEs\Event\EntityEvent;
 use AwdEs\ValueObject\Id;
 
-#[AsAggregateRoot(aggregateId: 'EXAMPLE_AGGREGATE')]
+#[AsAggregateRoot(name: 'EXAMPLE_AGGREGATE')]
 final class ExampleAggregate extends AggregateRoot
 {
     public Id $id;

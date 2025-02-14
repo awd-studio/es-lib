@@ -9,6 +9,7 @@ composer install awd-studio/es-lib
 
 ### Integration
 To use the library in your projects, you need to implement such interfaces:
+
 ```php
 # Storage / DB layer
 
@@ -27,5 +28,5 @@ To use the library in your projects, you need to implement such interfaces:
 
 ## Reading metadata
 \AwdEs\Event\Handling\EventHandlerMethodResolver::class
-\AwdEs\Event\Meta\EventMetadataResolver::class
+\AwdEs\Meta\Event\EventMetadataResolver::class
 ```

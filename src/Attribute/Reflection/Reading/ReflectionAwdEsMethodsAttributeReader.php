@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Attribute\Reflection;
+namespace AwdEs\Attribute\Reflection\Reading;
 
-use AwdEs\Attribute\Finder\MethodsAttributeFinder;
+use AwdEs\Attribute\Reading\AwdEsMethodsAttributeReader;
 
-final readonly class ReflectionMethodsAttributeFinder implements MethodsAttributeFinder
+final readonly class ReflectionAwdEsMethodsAttributeReader implements AwdEsMethodsAttributeReader
 {
     #[\Override]
-    public function find(string $class, string $attribute): \Generator
+    public function read(string $attribute, string $fromClass): \Generator
     {
-        $reflection = new \ReflectionClass($class);
+        $reflection = new \ReflectionClass($fromClass);
 
         foreach ($reflection->getMethods() as $method) {
             $attributes = $method->getAttributes($attribute);

@@ -7,25 +7,25 @@ namespace Example\Engine;
 use AwdEs\Event\EntityEvent;
 use AwdEs\Event\EventStream;
 use AwdEs\Event\InMemoryEventCollection;
-use AwdEs\Event\Meta\EventMetadataResolver;
+use AwdEs\Meta\Event\Reading\EventMetaReader;
 use AwdEs\ValueObject\Id;
 
 final class InMemoryEventStorage
 {
     /**
-     * @var array<class-string<EntityEvent>, array<string, list<EntityEvent>>>
+     * @var array<class-string<\AwdEs\Entity\AggregateEntity>, array<string, list<EntityEvent>>>
      */
     private array $events = [];
 
     public function __construct(
-        private readonly EventMetadataResolver $eventMetadataResolver,
+        private readonly EventMetaReader $eventMetaReader,
     ) {}
 
     public function put(EntityEvent $event): void
     {
-        $eventMeta = $this->eventMetadataResolver->resolve($event);
+        $eventMeta = $this->eventMetaReader->read($event::class);
 
-        $this->events[$eventMeta->entityClass][(string) $event->entityId()][] = $event;
+        $this->events[$eventMeta->entityFqn][(string) $event->entityId()][] = $event;
     }
 
     /**

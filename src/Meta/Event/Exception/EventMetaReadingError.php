@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Event\Meta\Exception;
+namespace AwdEs\Meta\Event\Exception;
 
 use AwdEs\Event\EntityEvent;
-use AwdEs\Exception\RuntimeException;
+use AwdEs\Exception\InvalidArgumentException;
 
-abstract class EventMetadataResolvingError extends RuntimeException
+abstract class EventMetaReadingError extends InvalidArgumentException
 {
     public function __construct(public EntityEvent $event, int $code = 0, ?\Throwable $previous = null)
     {
