@@ -16,10 +16,10 @@ final readonly class AttributeEventMetaReader implements EventMetaReader
     ) {}
 
     #[\Override]
-    public function read(string $entityClass): EventMeta
+    public function read(string $eventClass): EventMeta
     {
-        $attr = $this->reader->read(AsEntityEvent::class, $entityClass);
+        $attr = $this->reader->read(AsEntityEvent::class, $eventClass);
 
-        return new EventMeta($attr->name, $entityClass, $attr->entityFqn);
+        return new EventMeta($attr->name, $eventClass, $attr->entityFqn);
     }
 }

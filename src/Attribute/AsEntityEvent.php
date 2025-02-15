@@ -8,8 +8,8 @@ namespace AwdEs\Attribute;
 final readonly class AsEntityEvent implements AwdEsAttribute
 {
     /**
-     * @param string                                      $name      a unique ID of an event in the system
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityFqn the entity class' fqcn
+     * @param string                                $name      a unique ID of an event in the system
+     * @param class-string<\AwdEs\Aggregate\Entity> $entityFqn the entity class' fqcn
      */
     public function __construct(
         public string $name,

@@ -13,7 +13,7 @@ use AwdEs\ValueObject\Id;
 final class InMemoryEventStorage
 {
     /**
-     * @var array<class-string<\AwdEs\Entity\AggregateEntity>, array<string, list<EntityEvent>>>
+     * @var array<class-string<\AwdEs\Aggregate\Entity>, array<string, list<EntityEvent>>>
      */
     private array $events = [];
 
@@ -29,7 +29,7 @@ final class InMemoryEventStorage
     }
 
     /**
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityType
+     * @param class-string<\AwdEs\Aggregate\Entity> $entityType
      */
     public function getOneFor(string $entityType, Id $entityId): EventStream
     {
@@ -44,8 +44,8 @@ final class InMemoryEventStorage
     }
 
     /**
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityType
-     * @param array<Id>                                   $entityIdList
+     * @param class-string<\AwdEs\Aggregate\Entity> $entityType
+     * @param array<Id>                             $entityIdList
      */
     public function getMultipleFor(string $entityType, array $entityIdList): EventStream
     {

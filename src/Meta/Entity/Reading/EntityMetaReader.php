@@ -9,7 +9,7 @@ use AwdEs\Meta\Entity\EntityMeta;
 interface EntityMetaReader
 {
     /**
-     * @template TEntity of \AwdEs\Entity\AggregateEntity
+     * @template TEntity of \AwdEs\Aggregate\Entity
      *
      * @param class-string<TEntity> $entityClass
      *

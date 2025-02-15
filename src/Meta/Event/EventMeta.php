@@ -14,8 +14,8 @@ use AwdEs\Meta\ClassMeta;
 final readonly class EventMeta implements ClassMeta
 {
     /**
-     * @param class-string<TEvent>                        $fqn
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityFqn
+     * @param class-string<TEvent>                  $fqn
+     * @param class-string<\AwdEs\Aggregate\Entity> $entityFqn
      */
     public function __construct(
         public string $name,

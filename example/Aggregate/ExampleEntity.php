@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Example\Aggregate;
 
 use Awd\ValueObject\IDateTime;
-use AwdEs\Attribute\AsEntity;
+use AwdEs\Attribute\AsAggregateEntity;
 use AwdEs\Attribute\EventHandler;
-use AwdEs\Entity\AggregateEntity;
+use AwdEs\Aggregate\Entity;
 use AwdEs\Event\EntityEvent;
 use AwdEs\ValueObject\Id;
 
-#[AsEntity(name: 'EXAMPLE_ENTITY', rootFqn: ExampleAggregate::class)]
-final class ExampleEntity extends AggregateEntity
+#[AsAggregateEntity(name: 'EXAMPLE_ENTITY', rootFqn: ExampleAggregateRoot::class)]
+final class ExampleEntity extends Entity
 {
     public Id $id;
     public IDateTime $modifiedAt;

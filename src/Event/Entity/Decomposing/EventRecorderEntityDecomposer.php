@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AwdEs\Event\Entity\Decomposing;
 
-use AwdEs\Entity\Decomposing\EntityDecomposer;
-use AwdEs\Entity\Persistence\Transaction\TransactionManager;
+use AwdEs\Aggregate\Decomposing\EntityDecomposer;
+use AwdEs\Aggregate\Persistence\Transaction\TransactionManager;
 use AwdEs\Event\EventEmitter;
 use AwdEs\Event\Storage\Recorder\EventRecorder;
 

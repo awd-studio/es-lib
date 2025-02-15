@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Example\Aggregate;
 
-use AwdEs\Entity\AggregateEntity;
-use AwdEs\Entity\Persistence\UoW\UnitOfWork;
-use AwdEs\Entity\Repository\EntityRepository;
+use AwdEs\Aggregate\Entity;
+use AwdEs\Aggregate\Persistence\UoW\UnitOfWork;
+use AwdEs\Aggregate\Repository\EntityRepository;
 use AwdEs\ValueObject\Id;
 
 /**
@@ -19,13 +19,13 @@ final readonly class ExampleEntityRepository implements EntityRepository
     ) {}
 
     #[\Override]
-    public function get(Id $id): AggregateEntity
+    public function get(Id $id): Entity
     {
         return $this->uow->get(ExampleEntity::class, $id);
     }
 
     #[\Override]
-    public function store(AggregateEntity $entity): void
+    public function store(Entity $entity): void
     {
         $this->uow->store($entity);
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AwdEs\Event\Entity\Assembling;
 
-use AwdEs\Entity\AggregateEntity;
-use AwdEs\Entity\Composing\EntityComposer;
+use AwdEs\Aggregate\Composing\EntityComposer;
+use AwdEs\Aggregate\Entity;
 use AwdEs\Event\Applying\EventApplier;
 use AwdEs\Event\Storage\Fetcher\Criteria\ByTypeAndIdCriteria;
 use AwdEs\Event\Storage\Fetcher\EventFetcher;
@@ -19,7 +19,7 @@ final readonly class EventsEntityComposer implements EntityComposer
     ) {}
 
     #[\Override]
-    public function compose(string $entityType, Id $entityId): AggregateEntity
+    public function compose(string $entityType, Id $entityId): Entity
     {
         $criteria = new ByTypeAndIdCriteria($entityType, $entityId);
         $eventStream = $this->eventFetcher->fetch($criteria);

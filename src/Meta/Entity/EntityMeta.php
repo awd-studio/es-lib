@@ -7,7 +7,7 @@ namespace AwdEs\Meta\Entity;
 use AwdEs\Meta\ClassMeta;
 
 /**
- * @template TEntity of \AwdEs\Entity\AggregateEntity
+ * @template TEntity of \AwdEs\Aggregate\Entity
  *
  * @implements \AwdEs\Meta\ClassMeta<TEntity>
  */

@@ -9,7 +9,7 @@ use AwdEs\ValueObject\Id;
 final readonly class ByTypeAndIdCriteria implements Criteria
 {
     /**
-     * @param class-string<\AwdEs\Entity\AggregateEntity> $entityType
+     * @param class-string<\AwdEs\Aggregate\Entity> $entityType
      */
     public function __construct(
         public string $entityType,
