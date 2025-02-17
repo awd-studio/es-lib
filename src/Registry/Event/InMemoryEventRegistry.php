@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace AwdEs\Registry\Event;
 
+use AwdEs\Meta\Event\Reading\EventMetaReader;
+
 final class InMemoryEventRegistry implements EventRegistry
 {
     /**
-     * @param array<string, class-string<\AwdEs\Aggregate\Entity>> $registry
+     * @var array<string, class-string<\AwdEs\Event\EntityEvent>>
      */
+    private array $registry = [];
+
     public function __construct(
-        private array $registry = [],
+        private readonly EventMetaReader $reader,
     ) {}
 
     #[\Override]
-    public function register(string $eventFqn, string $eventName): void
+    public function register(string $eventFqn): void
     {
-        $this->registry[$eventName] = $eventFqn;
+        $meta = $this->reader->read($eventFqn);
+        $this->registry[$meta->name] = $eventFqn;
     }
 
     #[\Override]

@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace AwdEs\Registry\Entity;
 
+use AwdEs\Meta\Entity\Reading\EntityMetaReader;
+
 final class InMemoryEntityRegistry implements EntityRegistry
 {
     /**
-     * @param array<string, class-string<\AwdEs\Aggregate\Entity>> $registry
+     * @var array<string, class-string<\AwdEs\Aggregate\Entity>>
      */
+    private array $registry = [];
+
     public function __construct(
-        private array $registry = [],
+        private readonly EntityMetaReader $reader,
     ) {}
 
     #[\Override]
-    public function register(string $entityFqn, string $entityName): void
+    public function register(string $entityFqn): void
     {
-        $this->registry[$entityName] = $entityFqn;
+        $meta = $this->reader->read($entityFqn);
+        $this->registry[$meta->name] = $entityFqn;
     }
 
     #[\Override]

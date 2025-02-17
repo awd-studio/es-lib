@@ -7,12 +7,12 @@ namespace AwdEs\Registry\Event;
 interface EventRegistry
 {
     /**
-     * @param class-string<\AwdEs\Aggregate\Entity> $eventFqn
+     * @param class-string<\AwdEs\Event\EntityEvent> $eventFqn
      */
-    public function register(string $eventFqn, string $eventName): void;
+    public function register(string $eventFqn): void;
 
     /**
-     * @return class-string<\AwdEs\Aggregate\Entity>
+     * @return class-string<\AwdEs\Event\EntityEvent>
      *
      * @throws Exception\UnknownEventName
      */

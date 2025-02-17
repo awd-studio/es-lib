@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace AwdEs\Tests\Unit\Registry\Entity;
 
+use AwdEs\Meta\Entity\EntityMeta;
+use AwdEs\Meta\Entity\Reading\EntityMetaReader;
 use AwdEs\Registry\Entity\Exception\UnknownEntityName;
 use AwdEs\Registry\Entity\InMemoryEntityRegistry;
 use AwdEs\Tests\Shared\AppTestCase;
 use PHPUnit\Framework\Attributes\CoversFunction;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 
 use function PHPUnit\Framework\assertSame;
 
@@ -18,53 +22,61 @@ use function PHPUnit\Framework\assertSame;
 #[CoversFunction('register')]
 final class InMemoryEntityRegistryTest extends AppTestCase
 {
-    public function testMustAllowInstantiatingWithoutProvidingAnyArguments(): void
+    /**
+     * @var \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Meta\Entity\Reading\EntityMetaReader>
+     */
+    private EntityMetaReader|ObjectProphecy $readerProphecy;
+
+    #[\Override]
+    protected function setUp(): void
     {
-        new InMemoryEntityRegistry();
-
-        $this->expectNotToPerformAssertions();
-    }
-
-    public function testMustAllowInstantiatingWithEmptyArray(): void
-    {
-        new InMemoryEntityRegistry([]);
-
-        $this->expectNotToPerformAssertions();
+        $this->readerProphecy = $this->prophesize(EntityMetaReader::class);
+        $this->instance = new InMemoryEntityRegistry($this->readerProphecy->reveal());
     }
 
     public function testMustAllowRegistering(): void
     {
-        $instance = new InMemoryEntityRegistry();
-        $instance->register('foo', 'bar');
+        $meta = new EntityMeta('bar', 'foo', 'foo');
+        $this->readerProphecy
+            ->read(Argument::exact('foo'))
+            ->willReturn($meta);
+
+        $this->instance->register('foo');
 
         $this->expectNotToPerformAssertions();
     }
 
     public function testMustAllowRegisteringSameEntityMultipleTimes(): void
     {
-        $instance = new InMemoryEntityRegistry();
-        $instance->register('foo', 'bar');
-        $instance->register('foo', 'bar');
+        $meta = new EntityMeta('bar', 'foo', 'foo');
+        $this->readerProphecy
+            ->read(Argument::exact('foo'))
+            ->willReturn($meta);
+
+        $this->instance->register('foo', 'bar');
+        $this->instance->register('foo', 'bar');
 
         $this->expectNotToPerformAssertions();
     }
 
     public function testMustReturnRegisteredEntityProperly(): void
     {
-        $instance = new InMemoryEntityRegistry();
-        $instance->register('foo', 'bar');
+        $meta = new EntityMeta('bar', 'foo', 'foo');
+        $this->readerProphecy
+            ->read(Argument::exact('foo'))
+            ->willReturn($meta);
 
-        $actual = $instance->entityFqnFor('bar');
+        $this->instance->register('foo');
+
+        $actual = $this->instance->entityFqnFor('bar');
 
         assertSame('foo', $actual);
     }
 
     public function testMustThrowAnExceptionIfThereIsNoRegisteredEntity(): void
     {
-        $instance = new InMemoryEntityRegistry();
-
         $this->expectException(UnknownEntityName::class);
 
-        $instance->entityFqnFor('bar');
+        $this->instance->entityFqnFor('bar');
     }
 }

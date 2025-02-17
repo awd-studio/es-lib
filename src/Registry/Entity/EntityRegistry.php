@@ -9,7 +9,7 @@ interface EntityRegistry
     /**
      * @param class-string<\AwdEs\Aggregate\Entity> $entityFqn
      */
-    public function register(string $entityFqn, string $entityName): void;
+    public function register(string $entityFqn): void;
 
     /**
      * @return class-string<\AwdEs\Aggregate\Entity>
