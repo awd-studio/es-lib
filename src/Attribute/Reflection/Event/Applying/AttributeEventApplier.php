@@ -20,6 +20,11 @@ final readonly class AttributeEventApplier implements EventApplier
     public function apply(EntityEvent $event, object $consumer): void
     {
         foreach ($this->finder->read(EventHandler::class, $consumer::class) as $methodName => $attribute) {
+            // Skip handlers for other events
+            if ($attribute->eventType !== $event::class) {
+                continue;
+            }
+
             if (false === method_exists($consumer, $methodName)) {
                 throw new EventApplyingError(\sprintf('Method "%s" does not exist in the consumer "%s"!', $methodName, $consumer::class));
             }
