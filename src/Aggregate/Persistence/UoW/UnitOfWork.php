@@ -14,6 +14,8 @@ interface UnitOfWork
      *
      * @param class-string<TEntity> $entityType
      *
+     * @return TEntity
+     *
      * @throws \AwdEs\Aggregate\Exception\EntityNotFound
      */
     public function get(string $entityType, Id $entityId): Entity;

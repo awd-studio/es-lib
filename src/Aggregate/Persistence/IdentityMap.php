@@ -35,6 +35,13 @@ final class IdentityMap
         return $entity;
     }
 
+    /**
+     * @template TEntity of \AwdEs\Aggregate\Entity
+     *
+     * @param class-string<TEntity> $entityType
+     *
+     * @return TEntity|null
+     */
     public function find(string $entityType, Id $id): ?Entity
     {
         foreach ($this->map as $entity => $isChanged) {
