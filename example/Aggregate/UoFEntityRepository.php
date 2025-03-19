@@ -12,7 +12,7 @@ use AwdEs\ValueObject\Id;
 /**
  * @implements EntityRepository<\Example\Aggregate\ExampleEntity>
  */
-final readonly class ExampleEntityRepository implements EntityRepository
+final readonly class UoFEntityRepository implements EntityRepository
 {
     public function __construct(
         private UnitOfWork $uow,

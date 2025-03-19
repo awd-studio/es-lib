@@ -6,4 +6,4 @@ namespace Example\Aggregate;
 
 use AwdEs\Exception\RuntimeException;
 
-final class ExampleEntityInitViolation extends RuntimeException {}
+final class ExampleEntityProcessingError extends RuntimeException {}

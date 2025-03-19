@@ -17,8 +17,10 @@ final readonly class AttributeEventApplier implements EventApplier
     ) {}
 
     #[\Override]
-    public function apply(EntityEvent $event, object $consumer): void
+    public function apply(EntityEvent $event, object $consumer): bool
     {
+        $hasApplied = false;
+
         foreach ($this->finder->read(EventHandler::class, $consumer::class) as $methodName => $attribute) {
             // Skip handlers for other events
             if ($attribute->eventType !== $event::class) {
@@ -32,9 +34,12 @@ final readonly class AttributeEventApplier implements EventApplier
             try {
                 /* @phpstan-ignore method.dynamicName */
                 $consumer->$methodName($event);
+                $hasApplied = true;
             } catch (\Throwable $e) {
                 throw new EventApplyingError(\sprintf('Could not apply an event "%s" to a method "%s" of the consumer "%s": %s', $event::class, $methodName, $consumer::class, $e->getMessage()), $e->getCode(), $e);
             }
         }
+
+        return $hasApplied;
     }
 }
