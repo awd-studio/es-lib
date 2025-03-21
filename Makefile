@@ -38,7 +38,9 @@ php-bash:
 ## —— ✅ Test ——————————————————————————————————————————————————————————————————
 .PHONY: tests
 tests: ## Run all tests
+	$(DOCKER_COMPOSE) up -d php-fpm
 	$(COMPOSER) test
+	$(DOCKER_COMPOSE) stop
 
 ## —— 🐳 Docker ———————————————————————————————————————————————————————————————
 .PHONY: build
