@@ -17,13 +17,15 @@ use function PHPUnit\Framework\assertSame;
 
 /**
  * @coversDefaultClass \AwdEs\Registry\Event\InMemoryEventRegistry
+ *
+ * @internal
  */
 #[CoversFunction('__construct')]
 #[CoversFunction('register')]
 final class InMemoryEventRegistryTest extends AppTestCase
 {
     /**
-     * @var \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Meta\Event\Reading\EventMetaReader>
+     * @var ObjectProphecy<EventMetaReader>
      */
     private EventMetaReader|ObjectProphecy $readerProphecy;
 
@@ -39,7 +41,8 @@ final class InMemoryEventRegistryTest extends AppTestCase
         $meta = new EventMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo');
 
@@ -51,7 +54,8 @@ final class InMemoryEventRegistryTest extends AppTestCase
         $meta = new EventMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo');
         $this->instance->register('foo');
@@ -64,7 +68,8 @@ final class InMemoryEventRegistryTest extends AppTestCase
         $meta = new EventMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo');
 

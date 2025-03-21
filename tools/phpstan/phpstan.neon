@@ -3,10 +3,5 @@ parameters:
 	paths:
 		- ../../src
 		- ../../example
-#		- ../../tests
-
-#	ignoreErrors:
-#		-
-#		    identifier: missingType.generics
 
 	tmpDir: ../cache/phpstan

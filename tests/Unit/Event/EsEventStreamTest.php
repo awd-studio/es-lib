@@ -18,6 +18,8 @@ use function PHPUnit\Framework\assertTrue;
 
 /**
  * @coversDefaultClass \AwdEs\Event\EventStream
+ *
+ * @internal
  */
 final class EsEventStreamTest extends AppTestCase
 {
@@ -190,9 +192,9 @@ final class EsEventStreamTest extends AppTestCase
     }
 
     /**
-     * @return \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Event\EntityEvent>
+     * @return ObjectProphecy<EntityEvent>
      */
-    public function prophesizeEvent(): ObjectProphecy|EntityEvent
+    public function prophesizeEvent(): EntityEvent|ObjectProphecy
     {
         return $this->prophesize(EntityEvent::class);
     }

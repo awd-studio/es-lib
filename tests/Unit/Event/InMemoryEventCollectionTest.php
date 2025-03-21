@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AwdEs\Tests\Integration\Event;
+namespace AwdEs\Tests\Unit\Event;
 
 use Awd\ValueObject\DateTime;
 use AwdEs\Event\EntityEvent;
@@ -10,13 +10,13 @@ use AwdEs\Event\InMemoryEventCollection;
 use AwdEs\Tests\Shared\AppTestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
-use function PHPUnit\Framework\assertContains;
 use function PHPUnit\Framework\assertCount;
-use function PHPUnit\Framework\assertNotContains;
 use function PHPUnit\Framework\assertSame;
 
 /**
  * @coversDefaultClass \AwdEs\Event\InMemoryEventCollection
+ *
+ * @internal
  */
 final class InMemoryEventCollectionTest extends AppTestCase
 {
@@ -29,6 +29,7 @@ final class InMemoryEventCollectionTest extends AppTestCase
 
         $this->eventMock = $this->prophesizeEvent()->reveal();
     }
+
     public function testMustAllowCreatingEmptyStream(): void
     {
         $this->expectNotToPerformAssertions();
@@ -130,9 +131,9 @@ final class InMemoryEventCollectionTest extends AppTestCase
     }
 
     /**
-     * @return \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Event\EntityEvent>
+     * @return ObjectProphecy<EntityEvent>
      */
-    public function prophesizeEvent(): ObjectProphecy|EntityEvent
+    public function prophesizeEvent(): EntityEvent|ObjectProphecy
     {
         return $this->prophesize(EntityEvent::class);
     }
