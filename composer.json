@@ -1,14 +1,27 @@
 {
   "name": "awd-studio/es-lib",
-  "description": "An event-sourcing library",
+  "description": "An advanced event-sourcing library for PHP 8.3+ designed to handle domain events effectively.",
   "license": "MIT",
   "type": "library",
+  "keywords": [
+    "event-sourcing",
+    "library",
+    "php",
+    "domain-driven-design",
+    "es"
+  ],
   "authors": [
     {
       "name": "Anton Karpov",
-      "email": "awd.com.ua@gmail.com"
+      "email": "awd.com.ua@gmail.com",
+      "role": "Developer"
     }
   ],
+  "homepage": "https://github.com/awd-studio/es-lib",
+  "support": {
+    "issues": "https://github.com/awd-studio/es-lib/issues",
+    "source": "https://github.com/awd-studio/es-lib"
+  },
   "require": {
     "php": ">=8.3",
     "awd-studio/vo-date-time": "^1.0",
@@ -31,7 +44,6 @@
   "autoload-dev": {
     "psr-4": {
       "AwdEs\\Tests\\": "tests/",
-      "AwdEs\\Tests\\Integration\\": "tests/Integration/",
       "AwdEs\\Tests\\Shared\\": "tests/Shared/",
       "AwdEs\\Tests\\Unit\\": "tests/Unit/"
     }
@@ -39,9 +51,18 @@
   "config": {
     "allow-plugins": {
       "ergebnis/composer-normalize": true
-    }
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
   },
   "scripts": {
+    "post-install-cmd": [
+      "@composer normalize"
+    ],
+    "post-update-cmd": [
+      "@composer normalize"
+    ],
     "code-analyze": [
       "@phpstan-analyse",
       "@php-cs-fixer-dry",
@@ -109,8 +130,11 @@
     "php-cs-fixer-tests-fix": "@php-cs-fixer-tests-run fix --diff",
     "php-cs-fixer-tests-run": "tools/php-cs-fixer/vendor/bin/php-cs-fixer --config=tools/php-cs-fixer/.php-cs-fixer-tests.php",
     "phpstan-analyse": "@phpstan-run analyse -v",
+    "phpstan-tests-analyse": "@phpstan-tests-run analyse -v",
     "phpstan-clear-cache": "rm -rf tools/cache/phpstan",
+    "phpstan-tests-clear-cache": "rm -rf tools/cache/phpstan-tests",
     "phpstan-run": "tools/phpstan/vendor/bin/phpstan --configuration=tools/phpstan/phpstan.neon",
+    "phpstan-tests-run": "tools/phpstan/vendor/bin/phpstan --configuration=tools/phpstan/phpstan.tests.neon",
     "phpunit": "vendor/bin/phpunit tests",
     "rector": "@rector-process --config=tools/rector/rector.php",
     "rector-clear-cache": "tools/rector/vendor/bin/rector process --config=tools/rector/rector-tests.php --clear-cache --dry-run",

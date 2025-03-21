@@ -33,7 +33,7 @@ final readonly class AttributeEventApplier implements EventApplier
 
             try {
                 /* @phpstan-ignore method.dynamicName */
-                $consumer->$methodName($event);
+                $consumer->{$methodName}($event);
                 $hasApplied = true;
             } catch (\Throwable $e) {
                 throw new EventApplyingError(\sprintf('Could not apply an event "%s" to a method "%s" of the consumer "%s": %s', $event::class, $methodName, $consumer::class, $e->getMessage()), $e->getCode(), $e);

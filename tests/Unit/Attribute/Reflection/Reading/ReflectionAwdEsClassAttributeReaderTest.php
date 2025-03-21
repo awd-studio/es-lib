@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AwdEs\Tests\Unit\Attribute\Reflection\Reading;
 
-use Attribute;
 use AwdEs\Attribute\AwdEsAttribute;
 use AwdEs\Attribute\Reading\Exception\AwdEsClassAttributeNotFound;
 use AwdEs\Attribute\Reflection\Reading\ReflectionAwdEsClassAttributeReader;
@@ -20,6 +19,8 @@ final class TestMeClass {}
 
 /**
  * @coversDefaultClass \AwdEs\Attribute\Reflection\Reading\ReflectionAwdEsClassAttributeReader
+ *
+ * @internal
  */
 final class ReflectionAwdEsClassAttributeReaderTest extends AppTestCase
 {

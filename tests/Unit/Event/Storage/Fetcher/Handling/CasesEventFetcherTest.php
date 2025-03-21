@@ -17,6 +17,8 @@ use function PHPUnit\Framework\assertSame;
 
 /**
  * @coversDefaultClass \AwdEs\Event\Storage\Fetcher\Handling\CasesEventFetcher
+ *
+ * @internal
  */
 final class CasesEventFetcherTest extends AppTestCase
 {
@@ -53,9 +55,11 @@ final class CasesEventFetcherTest extends AppTestCase
         $caseProphecy2 = $this->prophesizeCase();
 
         $caseProphecy1->handle(Argument::exact($criteria))
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
         $caseProphecy2->handle(Argument::exact($criteria))
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $cases = [$caseProphecy1->reveal(), $caseProphecy2->reveal()];
 
@@ -73,7 +77,8 @@ final class CasesEventFetcherTest extends AppTestCase
 
         $caseProphecy = $this->prophesizeCase();
         $caseProphecy->handle(Argument::exact($criteria))
-            ->willReturn($eventStream);
+            ->willReturn($eventStream)
+        ;
 
         $cases = [$caseProphecy->reveal()];
 
@@ -91,17 +96,18 @@ final class CasesEventFetcherTest extends AppTestCase
         $caseProphecy1 = $this->prophesizeCase();
         $caseProphecy1->handle(Argument::exact($criteria))
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $caseProphecy2 = $this->prophesizeCase();
         $caseProphecy2->handle(Argument::exact($criteria))
             ->shouldBeCalledOnce()
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
         $cases = [$caseProphecy1->reveal(), $caseProphecy2->reveal()];
 
         $instance = new CasesEventFetcher($cases);
-
 
         $this->expectException(UnsupportedEventFetchingError::class);
         $instance->fetch($criteria);
@@ -114,11 +120,13 @@ final class CasesEventFetcherTest extends AppTestCase
 
         $caseProphecy1 = $this->prophesizeCase();
         $caseProphecy1->handle(Argument::exact($criteria))
-            ->willReturn($eventStream);
+            ->willReturn($eventStream)
+        ;
 
         $caseProphecy2 = $this->prophesizeCase();
         $caseProphecy2->handle(Argument::exact($criteria))
-            ->shouldNotBeCalled();
+            ->shouldNotBeCalled()
+        ;
 
         $cases = [$caseProphecy1->reveal(), $caseProphecy2->reveal()];
 
@@ -128,7 +136,7 @@ final class CasesEventFetcherTest extends AppTestCase
     }
 
     /**
-     * @return \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Event\Storage\Fetcher\Handling\CriteriaHandlingCase>
+     * @return ObjectProphecy<CriteriaHandlingCase>
      */
     private function prophesizeCase(): CriteriaHandlingCase|ObjectProphecy
     {
@@ -136,7 +144,7 @@ final class CasesEventFetcherTest extends AppTestCase
     }
 
     /**
-     * @return \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Event\Storage\Fetcher\Criteria\Criteria>
+     * @return ObjectProphecy<Criteria>
      */
     private function prophesizeCriteria(): Criteria|ObjectProphecy
     {
@@ -144,7 +152,7 @@ final class CasesEventFetcherTest extends AppTestCase
     }
 
     /**
-     * @return \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Event\EventStream>
+     * @return ObjectProphecy<EventStream>
      */
     private function prophesizeEventStream(): EventStream|ObjectProphecy
     {

@@ -17,13 +17,15 @@ use function PHPUnit\Framework\assertSame;
 
 /**
  * @coversDefaultClass \AwdEs\Registry\Entity\InMemoryEntityRegistry
+ *
+ * @internal
  */
 #[CoversFunction('__construct')]
 #[CoversFunction('register')]
 final class InMemoryEntityRegistryTest extends AppTestCase
 {
     /**
-     * @var \Prophecy\Prophecy\ObjectProphecy<\AwdEs\Meta\Entity\Reading\EntityMetaReader>
+     * @var ObjectProphecy<EntityMetaReader>
      */
     private EntityMetaReader|ObjectProphecy $readerProphecy;
 
@@ -39,7 +41,8 @@ final class InMemoryEntityRegistryTest extends AppTestCase
         $meta = new EntityMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo');
 
@@ -51,7 +54,8 @@ final class InMemoryEntityRegistryTest extends AppTestCase
         $meta = new EntityMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo', 'bar');
         $this->instance->register('foo', 'bar');
@@ -64,7 +68,8 @@ final class InMemoryEntityRegistryTest extends AppTestCase
         $meta = new EntityMeta('bar', 'foo', 'foo');
         $this->readerProphecy
             ->read(Argument::exact('foo'))
-            ->willReturn($meta);
+            ->willReturn($meta)
+        ;
 
         $this->instance->register('foo');
 

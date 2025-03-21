@@ -25,6 +25,7 @@ $config
     ->setRules([
         '@PER-CS2.0' => true,
         '@PHP83Migration' => true,
+        '@PhpCsFixer' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'protected_to_private' => false,
@@ -35,7 +36,6 @@ $config
         'get_class_to_class_keyword' => true,
         'final_class' => true,
         'concat_space' => ['spacing' => 'one'],
-        'phpdoc_to_comment' => ['ignored_tags' => ['psalm-suppress']],
         'trailing_comma_in_multiline' => [
             'elements' => ['arguments', 'arrays', 'match', 'parameters'],
             'after_heredoc' => true,

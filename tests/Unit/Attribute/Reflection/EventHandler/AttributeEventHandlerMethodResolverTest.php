@@ -19,6 +19,9 @@ use function PHPUnit\Framework\assertArrayNotHasKey;
 use function PHPUnit\Framework\assertCount;
 use function PHPUnit\Framework\assertSame;
 
+/**
+ * @internal
+ */
 #[CoversClass(AttributeEventHandlerMethodResolver::class)]
 final class AttributeEventHandlerMethodResolverTest extends AppTestCase
 {
