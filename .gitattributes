@@ -17,22 +17,20 @@ Makefile        text
 *.php           text
 
 # Exclude files from exporting
+/.dockerignore      export-ignore
+/.editorconfig      export-ignore
+/.env               export-ignore
+/.gitattributes     export-ignore
 /.github            export-ignore
-/docker             export-ignore
-/tools              export-ignore
-/tests              export-ignore
-/.phpstorm.meta.php export-ignore
+/.gitignore         export-ignore
 /bin                export-ignore
 /build              export-ignore
-/example            export-ignore
-/docs               export-ignore
-/tests              export-ignore
-/phpunit.xml.dist   export-ignore
-/.editorconfig      export-ignore
-/.dockerignore      export-ignore
-/.gitattributes     export-ignore
-/.gitignore         export-ignore
-/.env               export-ignore
 /compose.yaml       export-ignore
-/composer.json      export-ignore
+/composer.lock      export-ignore
+/docker             export-ignore
+/example            export-ignore
 /Makefile           export-ignore
+/phpunit.xml.dist   export-ignore
+/tests              export-ignore
+/tools              export-ignore
+
