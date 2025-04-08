@@ -19,7 +19,19 @@ abstract class Entity implements EventEmitter
 
     final public function __construct(private readonly EventApplier $_eventApplier)
     {
+        $this->version = new Version(0);
         $this->_newEvents = new EventStream();
+    }
+
+    public static function fromEventStream(EventStream $eventStream, EventApplier $eventApplier): static
+    {
+        $instance = new static($eventApplier);
+
+        foreach ($eventStream as $event) {
+            $instance->apply($event);
+        }
+
+        return $instance;
     }
 
     protected function recordThat(EntityEvent $event): void

@@ -29,12 +29,6 @@ final readonly class EventsEntityComposer implements EntityComposer
             throw new EntityComposingError(\sprintf('No events found for entity of type "%s" with id "%s".', $entityType, $entityId));
         }
 
-        $entity = new $entityType($this->eventApplier);
-
-        foreach ($eventStream as $event) {
-            $this->eventApplier->apply($event, $entity);
-        }
-
-        return $entity;
+        return $entityType::fromEventStream($eventStream, $this->eventApplier);
     }
 }

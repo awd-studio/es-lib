@@ -47,6 +47,12 @@ final readonly class InMemoryEventCollection implements EventCollection
     {
         $sortedEvents = [...$this->events];
         uasort($sortedEvents, static function(EntityEvent $a, EntityEvent $b) {
+            //            if ($a->occurredAt()->isEqual($b->occurredAt())) {
+            //                return 0;
+            //            }
+            //
+            //            return ($b->occurredAt()->isGreaterThan($a->occurredAt())) ? -1 : 1;
+
             if ($a->occurredAt()->isEqual($b->occurredAt())) {
                 return 0;
             }
