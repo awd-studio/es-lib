@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AwdEs\Tests\Unit\Event;
 
-use Awd\ValueObject\DateTime;
 use AwdEs\Event\EntityEvent;
 use AwdEs\Event\EventStream;
 use AwdEs\Tests\Shared\AppTestCase;
+use AwdEs\ValueObject\Version;
 use Prophecy\Prophecy\ObjectProphecy;
 
 use function PHPUnit\Framework\assertContains;
@@ -116,9 +116,9 @@ final class EsEventStreamTest extends AppTestCase
         $p2 = $this->prophesizeEvent();
         $p3 = $this->prophesizeEvent();
 
-        $p1->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:47'));
-        $p2->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:48'));
-        $p3->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:49'));
+        $p1->version()->willReturn(new Version(1));
+        $p2->version()->willReturn(new Version(2));
+        $p3->version()->willReturn(new Version(3));
 
         $event1 = $p1->reveal();
         $event2 = $p2->reveal();
@@ -143,9 +143,9 @@ final class EsEventStreamTest extends AppTestCase
         $p2 = $this->prophesizeEvent();
         $p3 = $this->prophesizeEvent();
 
-        $p1->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:47'));
-        $p2->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:48'));
-        $p3->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:49'));
+        $p1->version()->willReturn(new Version(1));
+        $p2->version()->willReturn(new Version(2));
+        $p3->version()->willReturn(new Version(3));
 
         $event1 = $p1->reveal();
         $event2 = $p2->reveal();
@@ -171,9 +171,9 @@ final class EsEventStreamTest extends AppTestCase
         $p2 = $this->prophesizeEvent();
         $p3 = $this->prophesizeEvent();
 
-        $p1->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:47'));
-        $p2->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:48'));
-        $p3->occurredAt()->willReturn(DateTime::fromString('2025-01-04 12:57:49'));
+        $p1->version()->willReturn(new Version(1));
+        $p2->version()->willReturn(new Version(2));
+        $p3->version()->willReturn(new Version(3));
 
         $event1 = $p1->reveal();
         $event2 = $p2->reveal();
