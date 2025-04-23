@@ -1,12 +1,13 @@
-/.env.local
-/.env.local.php
-/.env.*.local
-/vendor/
-/Del
+# Env files
+.env
+.env.*
+!.env.dist
 
+# PHPUnit
 /phpunit.xml
 .phpunit.result.cache
 
+# Tools
 /logs/
 tools/cache/*
 tools/logs/*
