@@ -28,10 +28,9 @@ tests/
 var/
 vendor/
 .editorconfig
-.env.*.local
-.env.local
-.env.local.php
-.env.test
+.env
+.env.*
+!.env.dist
 
 tools/cache/*
 tools/logs/*
