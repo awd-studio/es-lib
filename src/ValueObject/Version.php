@@ -28,4 +28,9 @@ final readonly class Version
     {
         return $this->value < $anotherVersion->value;
     }
+
+    public function isInitial(): bool
+    {
+        return 0 === $this->value;
+    }
 }

@@ -6,6 +6,7 @@ namespace AwdEs\Tests\Unit\ValueObject;
 
 use AwdEs\Tests\Shared\AppTestCase;
 use AwdEs\ValueObject\Version;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNotSame;
@@ -61,5 +62,38 @@ final class VersionTest extends AppTestCase
 
         assertTrue($version1->isLessThan($version2));
         assertFalse($version2->isLessThan($version1));
+    }
+
+    public function testIsInitialReturnsTrueWhenValueIsZero(): void
+    {
+        // Arrange
+        $version = new Version(0);
+
+        // Act
+        $result = $version->isInitial();
+
+        // Assert
+        $this->assertTrue($result, 'Expected Version::isInitial to return true for value 0.');
+    }
+
+    #[DataProvider('nonInitialValuesProvider')]
+    public function testIsInitialReturnsFalseForNonZeroValues(int $value): void
+    {
+        // Arrange
+        $version = new Version($value);
+
+        // Act
+        $result = $version->isInitial();
+
+        // Assert
+        $this->assertFalse($result, sprintf('Expected Version::isInitial to return false for value %d.', $value));
+    }
+
+    public static function nonInitialValuesProvider(): array
+    {
+        return [
+            'positive integer 1' => [1],
+            'larger positive integer 100' => [100],
+        ];
     }
 }

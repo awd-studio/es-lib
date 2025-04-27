@@ -28,6 +28,10 @@ abstract class Entity implements EventEmitter
         $instance = new static($eventApplier);
 
         foreach ($eventStream as $event) {
+            if (true === $instance->isInitialized() && false === $event->entityId()->isSame($instance->aggregateId())) {
+                continue;
+            }
+
             $instance->apply($event);
         }
 
@@ -58,7 +62,7 @@ abstract class Entity implements EventEmitter
 
     protected function isInitialized(): bool
     {
-        return (new \ReflectionProperty($this, 'version'))->isInitialized();
+        return false === $this->version->isInitial();
     }
 
     /**

@@ -10,5 +10,5 @@ interface IExampleEntityRepository
 {
     public function get(Id $id): IExampleEntity;
 
-    public function store(IExampleEntity $id): void;
+    public function store(IExampleEntity $entity): void;
 }
