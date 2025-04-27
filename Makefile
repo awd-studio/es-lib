@@ -2,21 +2,20 @@
 
 # ———————————————————————— 🔧 Environment Imports ———————————————————————————————
 -include .env.dist
--include .env
 -include .env.dev
 -include .env.override
 export
 
 # ———————————————————————— 🧩 Variables —————————————————————————————————————————
-MERGED_FILE := .env.merged
-ENV_SOURCES := $(wildcard .env.dist .env .env.$(APP_ENV) .env.override)
+MERGED_FILE := .env
+ENV_SOURCES := $(wildcard .env.dist .env.$(APP_ENV) .env.override)
 
 # Docker command helpers
 DOCKER = docker
 MAKE_SILENT = $(MAKE) --no-print-directory
 
 # Docker Compose with auto env-merge
-DOCKER_COMPOSE = $(MAKE_SILENT) env-merge && docker compose --env-file .env.merged
+DOCKER_COMPOSE = $(MAKE_SILENT) env-merge && docker compose --env-file .env
 
 # Log formatting helpers
 GREEN = /bin/echo -e "\x1b[32m\#\# $1\x1b[0m"
@@ -98,19 +97,19 @@ composer-normalize: ## Normalize composer.json
 
 ## ————————————————— 🛠️ Utilities ——————————————————————————————————————————————
 .PHONY: env-merge
-env-merge: ## Generate .env.merged from all env layers
+env-merge: ## Generate .env from all env layers
 	@NEW_ENV=$$(cat /dev/null \
 		$(shell [ -f .env.dist ] && echo .env.dist) \
 		$(shell [ -f .env ] && echo .env) \
 		$(shell [ -f .env.dev ] && echo .env.dev) \
 		$(shell [ -f .env.override ] && echo .env.override) \
 		| grep -v '^#' | grep -v '^\s*$$' | awk -F= '!seen[$$1]++'); \
-	OLD_ENV=$$(cat .env.merged 2>/dev/null || echo ""); \
+	OLD_ENV=$$(cat .env 2>/dev/null || echo ""); \
 	if [ "$$NEW_ENV" != "$$OLD_ENV" ]; then \
-		echo "$$NEW_ENV" > .env.merged; \
-		echo "🔄 Regenerated .env.merged"; \
+		echo "$$NEW_ENV" > .env; \
+		echo "🔄 Regenerated .env"; \
 	else \
-		echo "✅ .env.merged is up to date."; \
+		echo "✅ .env is up to date."; \
 	fi
 
 ## ————————————————— 📚 Help ————————————————————————————————————————————————————
