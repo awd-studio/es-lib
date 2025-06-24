@@ -2,6 +2,7 @@ services:
 
     php-fpm:
         container_name: ${DOCKER_SERVICE_NAME_PHP}
+        user: ${SYS_USER_UID}
         build:
             context: ./docker/php-fpm
             args:

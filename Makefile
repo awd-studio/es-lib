@@ -51,7 +51,7 @@ terminate: ## Unsets all the set
 
 php: ## Open Bash shell inside PHP container
 	$(DOCKER_COMPOSE) up -d php-fpm
-	$(DOCKER_COMPOSE) exec --user $(SYS_USER_NAME) php-fpm bash -l
+	$(DOCKER_COMPOSE) exec php-fpm bash -l
 
 ## ————————————————— 🏁 Runtime Control —————————————————————————————————————————
 .PHONY: start stop down restart

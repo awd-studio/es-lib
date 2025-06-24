@@ -56,6 +56,11 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/*
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN echo "alias c='composer'" >> /etc/bash.bashrc
 
+# Add composer's cache directory
+RUN mkdir /var/www/.composer && \
+    chown -R ${SYS_USER_NAME}:${SYS_USER_NAME} /var/www/.composer && \
+    chmod -R 755 /var/www/.composer
+
 # Add healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
     CMD curl -f http://localhost:9000/ping || exit 1
