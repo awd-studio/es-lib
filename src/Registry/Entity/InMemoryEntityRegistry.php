@@ -29,4 +29,13 @@ final class InMemoryEntityRegistry implements EntityRegistry
     {
         return $this->registry[$entityName] ?? throw new Exception\UnknownEntityName($entityName);
     }
+
+    /**
+     * @return \Generator<string, class-string<\AwdEs\Aggregate\Entity>>
+     */
+    #[\Override]
+    public function getIterator(): \Generator
+    {
+        yield from $this->registry;
+    }
 }

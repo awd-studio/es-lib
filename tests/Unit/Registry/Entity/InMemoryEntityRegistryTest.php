@@ -84,4 +84,32 @@ final class InMemoryEntityRegistryTest extends AppTestCase
 
         $this->instance->entityFqnFor('bar');
     }
+
+    public function testMustReturnRegisteredEntitiesViaIterator(): void
+    {
+        $meta1 = new EntityMeta('entity1', 'Foo\Entity1', 'Foo\Entity1');
+        $meta2 = new EntityMeta('entity2', 'Bar\Entity2', 'Bar\Entity2');
+
+        $this->readerProphecy
+            ->read(Argument::exact('Foo\Entity1'))
+            ->willReturn($meta1)
+        ;
+
+        $this->readerProphecy
+            ->read(Argument::exact('Bar\Entity2'))
+            ->willReturn($meta2)
+        ;
+
+        $this->instance->register('Foo\Entity1');
+        $this->instance->register('Bar\Entity2');
+
+        $expected = [
+            'entity1' => 'Foo\Entity1',
+            'entity2' => 'Bar\Entity2',
+        ];
+
+        $actual = iterator_to_array($this->instance);
+
+        assertSame($expected, $actual);
+    }
 }

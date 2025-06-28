@@ -84,4 +84,32 @@ final class InMemoryEventRegistryTest extends AppTestCase
 
         $this->instance->eventFqnFor('bar');
     }
+
+    public function testMustReturnRegisteredEventsViaIterator(): void
+    {
+        $meta1 = new EventMeta('event1', 'Foo\Event1', 'Foo\Event1');
+        $meta2 = new EventMeta('event2', 'Bar\Event2', 'Bar\Event2');
+
+        $this->readerProphecy
+            ->read(Argument::exact('Foo\Event1'))
+            ->willReturn($meta1)
+        ;
+
+        $this->readerProphecy
+            ->read(Argument::exact('Bar\Event2'))
+            ->willReturn($meta2)
+        ;
+
+        $this->instance->register('Foo\Event1');
+        $this->instance->register('Bar\Event2');
+
+        $expected = [
+            'event1' => 'Foo\Event1',
+            'event2' => 'Bar\Event2',
+        ];
+
+        $actual = iterator_to_array($this->instance);
+
+        assertSame($expected, $actual);
+    }
 }

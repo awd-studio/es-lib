@@ -29,4 +29,13 @@ final class InMemoryEventRegistry implements EventRegistry
     {
         return $this->registry[$eventName] ?? throw new Exception\UnknownEventName($eventName);
     }
+
+    /**
+     * @return \Generator<string, class-string<\AwdEs\Event\EntityEvent>>
+     */
+    #[\Override]
+    public function getIterator(): \Generator
+    {
+        yield from $this->registry;
+    }
 }

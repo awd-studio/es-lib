@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace AwdEs\Registry\Entity;
 
-interface EntityRegistry
+/**
+ * @extends \IteratorAggregate<string, class-string<\AwdEs\Aggregate\Entity>>
+ */
+interface EntityRegistry extends \IteratorAggregate
 {
     /**
      * @param class-string<\AwdEs\Aggregate\Entity> $entityFqn

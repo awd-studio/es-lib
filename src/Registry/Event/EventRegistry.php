@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace AwdEs\Registry\Event;
 
-interface EventRegistry
+/**
+ * @extends \IteratorAggregate<string, class-string<\AwdEs\Event\EntityEvent>>
+ */
+interface EventRegistry extends \IteratorAggregate
 {
     /**
      * @param class-string<\AwdEs\Event\EntityEvent> $eventFqn
